@@ -1,0 +1,12 @@
+body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
+.container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+h1 { text-align: center; }
+label { display: block; margin: 10px 0 5px; }
+select, button { width: 100%; padding: 10px; margin-bottom: 10px; }
+.checkboxes { display: grid; grid-template-columns: repeat(2, 1fr); }
+.checkboxes label { display: flex; align-items: center; }
+button { background: #4CAF50; color: white; border: none; cursor: pointer; }
+button:hover { background: #45a049; }
+#result { margin-top: 20px; padding: 10px; border-top: 1px solid #ddd; }
+.hidden { display: none; }
+pre { white-space: pre-wrap; }
