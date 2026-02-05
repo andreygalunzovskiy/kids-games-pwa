@@ -94,3 +94,24 @@ function filterGames(age, items, timeRange) {
     }
     return null;
 }
+// Активные кнопки возраста и времени
+document.querySelectorAll('.age-btn, .time-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    });
+});
+
+// Генерация чекбоксов предметов (динамически)
+const itemsList = ['бумага','карандаши/фломастеры','прищепки','крышки','коробка','ложки','верёвка','подушки','вода','ничего'];
+const itemsGrid = document.getElementById('items-grid');
+itemsList.forEach(item => {
+    const div = document.createElement('div');
+    div.innerHTML = `
+        <label>
+            <input type="checkbox" value="${item}" class="hidden">
+            <span>${item === 'ничего' ? '🙅‍♀️ Ничего' : item}</span>
+        </label>
+    `;
+    itemsGrid.appendChild(div);
+});
