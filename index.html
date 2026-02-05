@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игры для детей</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Для PWA иконки (создай простые PNG 192x192 и 512x512) -->
+    <link rel="icon" href="icon-192.png" sizes="192x192">
+    <link rel="icon" href="icon-512.png" sizes="512x512">
+    <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+    <div class="container">
+        <h1>Игры для детей: Быстрый выбор</h1>
+        <p>Выберите параметры и получите одну игру!</p>
+        
+        <form id="game-form">
+            <label>Возраст ребёнка:</label>
+            <select id="age">
+                <option value="1-2">1–2 года</option>
+                <option value="3-4">3–4 года</option>
+                <option value="5-6">5–6 лет</option>
+                <option value="7+">7+ лет</option>
+            </select>
+            
+            <label>Что есть под рукой (выберите несколько):</label>
+            <div class="checkboxes">
+                <label><input type="checkbox" value="бумага"> Бумага</label>
+                <label><input type="checkbox" value="карандаши/фломастеры"> Карандаши/фломастеры</label>
+                <label><input type="checkbox" value="прищепки"> Прищепки</label>
+                <label><input type="checkbox" value="крышки"> Крышки</label>
+                <label><input type="checkbox" value="коробка"> Коробка</label>
+                <label><input type="checkbox" value="ложки"> Ложки</label>
+                <label><input type="checkbox" value="верёвка"> Верёвка</label>
+                <label><input type="checkbox" value="подушки"> Подушки</label>
+                <label><input type="checkbox" value="вода"> Вода</label>
+                <label><input type="checkbox" value="ничего"> Ничего</label>
+            </div>
+            
+            <label>Сколько времени:</label>
+            <select id="time">
+                <option value="3-5">3–5 мин</option>
+                <option value="10">10 мин</option>
+                <option value="20+">20+ мин</option>
+            </select>
+            
+            <button type="submit">Дай игру!</button>
+        </form>
+        
+        <div id="result" class="hidden">
+            <h2>Игра: <span id="name"></span></h2>
+            <p>🧠 Развивает: <span id="goal"></span></p>
+            <p>⏱ <span id="time-output"></span> минут</p>
+            <p>Как играть:</p>
+            <pre id="description"></pre>
+            <p>Подсказка: Если устал — играйте сидя.</p>
+            <button id="another">Другая игра</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('Service Worker registered'))
+                .catch(err => console.error('Service Worker error:', err));
+        }
+    </script>
+</body>
+</html>
