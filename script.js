@@ -53,11 +53,21 @@ const games = [
 
 document.getElementById('game-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    const ageInput = document.getElementById('age').value;
+    
+    // Сбор возраста из активной кнопки
+    const activeAgeBtn = document.querySelector('.age-btn.active');
+    if (!activeAgeBtn) return alert('Выберите возраст!');
+    const ageInput = activeAgeBtn.dataset.age;
     const ageMap = {'1-2': 1.5, '3-4': 3.5, '5-6': 5.5, '7+': 7};
     const age = ageMap[ageInput];
-    const selectedItems = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
-    const timeRange = document.getElementById('time').value;
+    
+    // Сбор предметов
+    const selectedItems = Array.from(document.querySelectorAll('#items-grid input[type="checkbox"]:checked')).map(cb => cb.value);
+    
+    // Сбор времени
+    const activeTimeBtn = document.querySelector('.time-btn.active');
+    if (!activeTimeBtn) return alert('Выберите время!');
+    const timeRange = activeTimeBtn.dataset.time;
     
     const game = filterGames(age, selectedItems, timeRange);
     
@@ -65,9 +75,10 @@ document.getElementById('game-form').addEventListener('submit', function(e) {
     if (game) {
         document.getElementById('name').textContent = game.name;
         document.getElementById('goal').textContent = game.goal;
-        document.getElementById('time-output').textContent = game.time;
+        document.getElementById('time-badge').textContent = game.time + ' мин';
         document.getElementById('description').textContent = game.description;
         resultDiv.classList.remove('hidden');
+        resultDiv.scrollIntoView({behavior: 'smooth'});
     } else {
         alert('Нет подходящей игры. Попробуйте другие параметры.');
     }
@@ -75,6 +86,37 @@ document.getElementById('game-form').addEventListener('submit', function(e) {
 
 document.getElementById('another').addEventListener('click', function() {
     document.getElementById('game-form').dispatchEvent(new Event('submit'));
+});
+
+// Активные кнопки возраста и времени
+document.querySelectorAll('.age-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.age-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    });
+});
+
+document.querySelectorAll('.time-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    });
+});
+
+// Генерация чекбоксов предметов (динамически)
+const itemsList = ['бумага','карандаши/фломастеры','прищепки','крышки','коробка','ложки','верёвка','подушки','вода','ничего'];
+const itemsGrid = document.getElementById('items-grid');
+itemsList.forEach(item => {
+    const div = document.createElement('div');
+    div.innerHTML = `
+        <label class="cursor-pointer">
+            <input type="checkbox" value="${item}" class="hidden peer">
+            <span class="block px-4 py-3 rounded-2xl bg-orange-50 peer-checked:bg-orange-200 peer-checked:text-orange-800 transition font-medium">
+                ${item === 'ничего' ? '🙅‍♀️ Ничего' : item}
+            </span>
+        </label>
+    `;
+    itemsGrid.appendChild(div);
 });
 
 function filterGames(age, items, timeRange) {
@@ -94,24 +136,8 @@ function filterGames(age, items, timeRange) {
     }
     return null;
 }
-// Активные кнопки возраста и времени
-document.querySelectorAll('.age-btn, .time-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-    });
-});
 
-// Генерация чекбоксов предметов (динамически)
-const itemsList = ['бумага','карандаши/фломастеры','прищепки','крышки','коробка','ложки','верёвка','подушки','вода','ничего'];
-const itemsGrid = document.getElementById('items-grid');
-itemsList.forEach(item => {
-    const div = document.createElement('div');
-    div.innerHTML = `
-        <label>
-            <input type="checkbox" value="${item}" class="hidden">
-            <span>${item === 'ничего' ? '🙅‍♀️ Ничего' : item}</span>
-        </label>
-    `;
-    itemsGrid.appendChild(div);
-});
+// Функция поделиться (опционально, для будущего)
+function shareGame() {
+    alert('Поделиться: скопируйте ссылку или игру!');
+}
