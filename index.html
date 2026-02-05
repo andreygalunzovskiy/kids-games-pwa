@@ -10,19 +10,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 min-h-screen font-sans">
-
     <div class="max-w-xl mx-auto p-6 pt-12">
-        <!-- Header -->
         <div class="text-center mb-10">
             <div class="text-6xl mb-3">🧸</div>
             <h1 class="text-4xl font-bold text-orange-600">Займи малыша</h1>
             <p class="text-orange-500 mt-1 text-lg">5 минут · подручные вещи · без экранов</p>
         </div>
-
-        <!-- Форма -->
         <div class="bg-white rounded-3xl shadow-xl p-8">
             <form id="game-form" class="space-y-8">
-                <!-- Возраст -->
                 <div>
                     <label class="block text-sm font-medium text-gray-600 mb-3">Сколько лет ребёнку?</label>
                     <div class="grid grid-cols-4 gap-3">
@@ -32,14 +27,10 @@
                         <button type="button" data-age="7+" class="age-btn py-4 bg-orange-100 hover:bg-orange-200 rounded-2xl text-2xl transition">🌟 7+</button>
                     </div>
                 </div>
-
-                <!-- Предметы -->
                 <div>
                     <label class="block text-sm font-medium text-gray-600 mb-3">Что есть под рукой?</label>
                     <div id="items-grid" class="grid grid-cols-2 gap-3 text-sm"></div>
                 </div>
-
-                <!-- Время -->
                 <div>
                     <label class="block text-sm font-medium text-gray-600 mb-3">Сколько времени есть?</label>
                     <div class="flex gap-3">
@@ -48,15 +39,11 @@
                         <button type="button" data-time="20+" class="time-btn flex-1 py-4 bg-amber-100 hover:bg-amber-200 rounded-2xl transition">20+ мин</button>
                     </div>
                 </div>
-
-                <button type="submit" id="submit-btn"
-                        class="w-full py-6 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-2xl font-bold rounded-3xl shadow-lg hover:scale-105 transition active:scale-95">
+                <button type="submit" id="submit-btn" class="w-full py-6 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-2xl font-bold rounded-3xl shadow-lg hover:scale-105 transition active:scale-95">
                     Дай игру! 🎲
                 </button>
             </form>
         </div>
-
-        <!-- Результат -->
         <div id="result" class="hidden mt-10">
             <div class="bg-white rounded-3xl shadow-xl p-8">
                 <div class="flex justify-between items-start">
@@ -66,12 +53,10 @@
                     </div>
                     <div id="time-badge" class="px-5 py-2 bg-amber-100 text-amber-700 font-bold rounded-2xl text-lg"></div>
                 </div>
-
                 <div class="my-8 border-t border-b py-6">
                     <p class="text-sm uppercase tracking-widest text-gray-400 mb-2">Как играть</p>
                     <pre id="description" class="text-lg leading-relaxed whitespace-pre-wrap text-gray-700"></pre>
                 </div>
-
                 <div class="flex gap-4">
                     <button id="another" class="flex-1 py-5 bg-gray-100 hover:bg-gray-200 rounded-3xl font-medium transition">
                         Ещё одна игра
@@ -83,7 +68,11 @@
             </div>
         </div>
     </div>
-
     <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').then(() => console.log('SW registered')).catch(err => console.error('SW error:', err));
+        }
+    </script>
 </body>
 </html>
