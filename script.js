@@ -51,6 +51,8 @@ const games = [
     {id: 50, name: 'Бумажный код', age_min: 7, age_max: Infinity, items: ['бумага', 'карандаши/фломастеры'], time: '10', description: '1. Напиши код (шифр). 2. Зашифруй сообщение. 3. Расшифруй.', goal: 'Логика, грамотность'},
 ];
 
+console.log('Games loaded:', games.length); // должно быть 50
+
 document.getElementById('game-form').addEventListener('submit', function(e) {
     e.preventDefault();
     console.log('Form submitted! Collecting data...');
